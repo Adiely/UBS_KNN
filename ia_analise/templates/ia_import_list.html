@@ -4,14 +4,14 @@
 {% bootstrap_javascript %}
 {% bootstrap_messages %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8" />
-<title>IA Import.html</title>
+<title>Arquivo de I.A. importado</title>
 </head>
 <body>
     </th><h1>&nbsp;Arquivo Importado!</h1>
-    <pre><h5>&nbsp; Este é o arquivo que foi importado</h5></pre>
+    <pre><h5>&nbsp; Este é o arquivo que foi importado com sucesso!</h5></pre>
     <div class="container">
         <div class="row" style="line-height: 1;">
         <div class="col-md-12 col-sm-12 col-xs-12">
@@ -19,33 +19,27 @@
         <th>Grupo</th>
         <th>Idade</th>
         <th>Sexo</th>
-        <th>Cancer</th>
-        <th>Diabetes</th>
-        <th>Hipertensao</th>
-        <th>Obesidade</th>
-        <th>Urgência</th>
-        <th>Diabetes</th>
-        <th>Hipertensao</th>
-        <th>Obesidade</th>
-        <th>Cancer</th>
-        <th>Diabetes</th>
-        <th>Hipertensao</th>
-        {% for regs in Pacientes %}
+        <th>Tabagismo</th>
+        <th>Consumo de Álcool</th>
+        <th>Infecção por HPV</th>
+        <th>Exposição Solar</th>
+        <th>Dieta Inadequada</th>
+        <th>Higiene Oral Inadequada</th>
+        <th>Uso de Prótese Inadequada</th>
+        <th>Grau de Risco</th>
+        {% for regs in DatasetCancerBucal %}
             <tr>
                 <td>{{ regs.grupo }}</td>
-                <td>{{ regs.Idade}}</td>
-                <td>{{ regs.Sexo }}</td>
-                <td>{{ regs.Cond_Cancer }}</td>
-                <td>{{ regs.Cond_Diabetes }}</td>
-                <td>{{ regs.Cond_Hipertensao }}</td>
-                <td>{{ regs.Cond_Obesidade }}</td>
-                <td>{{ regs.Adm_Emergencia }}</td>
-                <td>{{ regs.Admin_Urgencia }}</td>
-                <td>{{ regs.Med_Ibuprofeno }}</td>
-                <td>...</td>
-                <td>{{ regs.Med_Lipitor }}</td>
-                <td>{{ regs.Med_Paracetamol }}</td>
-                <td>{{ regs.Med_Penicilina}}</td>
+                <td>{{ regs.tabagismo}}</td>
+                <td>{{ regs.consumo_alcool }}</td>
+                <td>{{ regs.idade }}</td>
+                <td>{{ regs.sexo}}</td>
+                <td>{{ regs.infeccao_hpv }}</td>
+                <td>{{ regs.exposicao_solar }}</td>
+                <td>{{ regs.dieta_inadequada }}</td>
+                <td>{{ regs.higiene_bucal_inadequada }}</td>
+                <td>{{ regs.uso_protese_inadequada}}</td>
+                <td>{{ regs.grau_risco}}</td>
             </tr>
             {% endfor %}
             </table>
@@ -54,5 +48,6 @@
     </div>
 </body>
 </html>
+        
         
 

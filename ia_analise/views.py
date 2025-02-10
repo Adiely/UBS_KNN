@@ -1,16 +1,58 @@
-
 from django.views.generic import ListView
 from django.shortcuts import render
 
 # Define a função index
 
-
 def index(request):
     return render(request, 'index.html')
 
+# FUNÇÃO PARA IMPORTAR OS ARQUIVOS DE DATASET
 def ia_import(request):
     return render (request, 'ia_import.html')
 
+
+# FUNÇÃO DE IMPORTAÇÃO DO DATASET CANCER BUCAL
+
+def ia_import_save(request):
+    from .models import DatasetCancerBucal
+    import os
+    from django.core.files.storage import FileSystemStorage
+    if request.method == 'POST' and request.FILES['arq_upload']:
+        fss = FileSystemStorage()
+        upload = request.FILES['arq_upload'] 
+        file1 = fss.save(upload.name, upload)
+        file_url = fss.url(file1)
+        DatasetCancerBucal.objects.all().delete() 
+        
+        i = 0
+
+        file2 = open(file1,'r')
+        for row in file2:
+            if (i > 0):
+                row2 = row.replace(',', '.')
+                row3 = row2.split(';')
+                DatasetCancerBucal.objects.create(
+                                grupo = row3[0], idade = float(row3[1]), sexo = float(row3[2]), 
+                                tabagismo = float(row3[3]), consumo_alcool = float(row3[4]), 
+                                infeccao_hpv = float(row3[5]), exposicao_solar = float(row3[6]),
+                                dieta_inadequada = float(row3[7]), higiene_bucal_inadequada = float(row3[8]), 
+                                uso_protese_inadequada = float(row3[9]), grau_risco = float(row3[10]))
+            i = i + 1
+        file2.close()
+        #os.remove(file_url.replace("/", ""))
+    
+    from django.shortcuts import redirect
+    return redirect('ia_import_list') 
+
+def ia_import_list(request):
+    from.models import DatasetCancerBucal
+    data = {}
+    data ['DatasetCancerBucal'] = DatasetCancerBucal.objects.all()
+    return render(request, 'ia_import_list.html', data)   
+
+# FUNÇÃO DE IMPORTAÇÃO DO DATASET PACIENTES
+
+'''
 def ia_import_save(request):
     from .models import Pacientes
     import os
@@ -23,6 +65,7 @@ def ia_import_save(request):
         from .models import Pacientes
         Pacientes.objects.all().delete() 
         i = 0
+        
         file2 = open(file1,'r')
         for row in file2:
             if (i > 0):
@@ -33,11 +76,11 @@ def ia_import_save(request):
                                 Cond_Cancer = float(row3[3]), Cond_Diabetes = float(row3[4]), 
                                 Cond_Hipertensao = float(row3[5]), Cond_Obesidade = float(row3[6]),
                                 Adm_Emergencia = float(row3[7]), Adm_Urgencia = float(row3[8]), 
-                                Med_Ibuprofeno = float(row3[9]), Med_Lipitor = float(row3[10]), 
-                                Med_Paracetamol = float(row3[11]), Med_Penicilina = float(row3[12]), 
-                                Teste_Inconclusivo = float(row3[13]), Teste_Normal = float(row3[14]), 
+                                Med_Ibuprofeno = float(row3[9]), Med_Lipitor = float(row3[10]),                               
+                                Med_Paracetamol = float(row3[11]), Med_Penicilina = float(row3[12]),
+                                Teste_Inconclusivo = float(row3[13]), Teste_Normal = float(row3[14]),
                                 Teste_Anormal = float(row3[15]))
-            i = i + 1
+        i = i + 1
         file2.close()
         #os.remove(file_url.replace("/", ""))
     from django.shortcuts import redirect
@@ -47,14 +90,15 @@ def ia_import_list(request):
     from .models import Pacientes
     data = {}
     data['Pacientes'] = Pacientes.objects.all()
-    return render(request, 'ia_import_list.html', data)   
+    return render(request, 'ia_import_list.html', data) 
+'''  
 
 def ia_knn_treino(request):
     data = {}
-    print("Vamos ao que interessa...")
+    print("Modelo em treinamento!")
     import pandas as pd 
-    from.models import Pacientes
-    dados_queryset= Pacientes.objects.all()
+    from.models import DatasetCancerBucal
+    dados_queryset= DatasetCancerBucal.objects.all()
     print("Registros Selecionados.")
     df= pd.DataFrame(list(dados_queryset.values()))
     print("Pandas Carregado e dados 'convertidos'.")
@@ -116,6 +160,7 @@ def ia_knn_treino(request):
     print(f'Acurácia no conjunto de teste: {test_accuracy* 100:.2f}%')
 
     import joblib
+    
     # Salvar o modelo treinado com o joblib
     model_filename = 'knn_model.pkl'  # Caminho do arquivo onde o modelo será salvo
     joblib.dump(best_knn, model_filename)
@@ -133,8 +178,8 @@ def ia_knn_matriz(request):
     from sklearn.metrics import confusion_matrix
     import numpy as np 
     import pandas as pd
-    from.models import Pacientes  
-    Dados_queryset= Pacientes.objects.all()
+    from.models import DatasetCancerBucal  
+    Dados_queryset= DatasetCancerBucal.objects.all()
     df= pd.DataFrame(list(Dados_queryset.values()))
     from sklearn.model_selection import train_test_split
     X= df.drop(columns=['grupo', 'id'])
@@ -157,10 +202,10 @@ def ia_knn_roc(request):
     from sklearn.metrics import roc_curve, auc
     import plotly.graph_objects as go
     import numpy as np
-    from.models import Pacientes 
+    from.models import DatasetCancerBucal
     from django.shortcuts import render
     
-    dados_queryset= Pacientes.objects.all()
+    dados_queryset= DatasetCancerBucal.objects.all()
     df= pd.DataFrame(list(dados_queryset.values()))
     X= df.drop(columns=['grupo', 'id'])
     y= df['grupo'].map({'Controle': -1, 'Experimental': 1})
@@ -188,10 +233,10 @@ def ia_knn_recall(request):
     from sklearn.metrics import precision_recall_curve, auc
     import plotly.graph_objects as go 
     import numpy as np 
-    from.models import Pacientes
+    from.models import DatasetCancerBucal
     from django.shortcuts import render 
     
-    dados_queryset= Pacientes.objects.all()
+    dados_queryset= DatasetCancerBucal.objects.all()
     df= pd.DataFrame(list(dados_queryset.values()))
     X= df.drop(columns=['grupo', 'id'])
     y= df['grupo'].map({'Controle': -1, 'Experimental': 1})
@@ -213,5 +258,3 @@ def ia_knn_recall(request):
     )
     graph= fig.to_html(full_html=False)
     return render(request, 'ia_knn_recall.html', {'graph': graph}) 
-
-                     

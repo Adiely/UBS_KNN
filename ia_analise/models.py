@@ -6,27 +6,38 @@ importados na APP ia_analise
 from django.db import models
 
 class DatasetCancerBucal(models.Model):
-    grupo = models.CharField(max_length=50, null=True,
-                             blank=True, verbose_name='Grupo')
+    
+    grupo = models.CharField(
+        max_length=50, null=True, blank=True, verbose_name='grupo')
+  
+    idade = models.FloatField (
+        null=True, blank=True, verbose_name='idade')
+   
+    sexo = models.CharField(
+        max_length=50, null=True,blank=True, verbose_name='sexo')
+
     tabagismo = models.CharField(
-        max_length=50, null=True, blank=True, verbose_name='Tabagismo')
-    consumo_de_alcool = models.CharField(
-        max_length=50, null=True, blank=True, verbose_name='Consumo de Álcool')
-    idade = models.FloatField(null=True, blank=True, verbose_name='Idade')
-    sexo = models.CharField(max_length=50, null=True,
-                            blank=True, verbose_name='Sexo')
-    infeccao_por_hpv = models.CharField(
-        max_length=50, null=True, blank=True, verbose_name='Infecção por HPV')
+        max_length=50, null=True, blank=True, verbose_name='tabagismo')
+    
+    consumo_alcool = models.BooleanField(default=False) 
+    
+    infeccao_hpv = models.CharField(
+        max_length=50, null=True, blank=True, verbose_name='infeccao_hpv')
+    
     exposicao_solar = models.CharField(
-        max_length=50, null=True, blank=True, verbose_name='Exposição Solar')
+        max_length=50, null=True, blank=True, verbose_name='exposicao_solar')
+    
     dieta_inadequada = models.CharField(
-        max_length=50, null=True, blank=True, verbose_name='Dieta Inadequada')
+        max_length=50, null=True, blank=True, verbose_name='dieta_inadequada')
+    
     higiene_bucal_inadequada = models.CharField(
-        max_length=50, null=True, blank=True, verbose_name='Higiene Bucal Inadequada')
-    uso_de_protese_inadequada = models.CharField(
-        max_length=50, null=True, blank=True, verbose_name='Uso de Prótese Inadequada')
-    grau_de_risco = models.CharField(
-        max_length=50, null=True, blank=True, verbose_name='Grau de Risco')
+        max_length=50, null=True, blank=True, verbose_name='higiene_bucal_inadequada')
+    
+    uso_protese_inadequada = models.CharField(
+        max_length=50, null=True, blank=True, verbose_name='uso_protese_inadequada')
+    
+    grau_risco = models.CharField(
+        max_length=50, null=True, blank=True, verbose_name='grau_risco')
 
 
 def __str__(self):
