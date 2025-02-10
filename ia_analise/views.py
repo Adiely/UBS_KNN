@@ -32,8 +32,8 @@ def ia_import_save(request):
                 row2 = row.replace(',', '.')
                 row3 = row2.split(';')
                 DatasetCancerBucal.objects.create(
-                                grupo = row3[0], idade = float(row3[1]), sexo = float(row3[2]), 
-                                tabagismo = float(row3[3]), consumo_alcool = float(row3[4]), 
+                                grupo = row3[0], tabagismo = float(row3[1]), consumo_alcool = float(row3[2]), 
+                                idade = float(row3[3]), sexo = float(row3[4]), 
                                 infeccao_hpv = float(row3[5]), exposicao_solar = float(row3[6]),
                                 dieta_inadequada = float(row3[7]), higiene_bucal_inadequada = float(row3[8]), 
                                 uso_protese_inadequada = float(row3[9]), grau_risco = float(row3[10]))
