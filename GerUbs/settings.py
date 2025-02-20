@@ -39,10 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home',
     'ia_analise',
+    'bootstrap4',
     'bootstrap5',
     'django_tables2',
-    
-    #'pessoas',
 ]
 
 MIDDLEWARE = [

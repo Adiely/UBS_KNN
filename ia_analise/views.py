@@ -1,10 +1,39 @@
-from django.views.generic import ListView
-from django.shortcuts import render
+from django .shortcuts import render
 
-# Define a função index
+from django .http import HttpResponse
+    
+from django.contrib.auth import authenticate, login
 
-def index(request):
-    return render(request, 'index.html')
+def login_usr(request):
+    usuario = request.POST.get('username')
+    senha = request.POST.get('password')
+    user = authenticate(username=usuario, password=senha)
+    if (user is not None):
+        login(request, user)
+        request.session['username'] = usuario
+        request.session['password'] = senha
+        request.session['usernamefull'] = user.get_full_name()
+        print(request.session['username'])
+        print(request.session['password'])
+        print(request.session['usernamefull'])
+        from django.shortcuts import redirect
+        return redirect('menu_analitico')
+    else:
+        data ={}
+        if (usuario):
+           data['msg'] = "Usuário autenticado com sucesso!" + usuario
+        return render(request, 'login_usr.html')
+
+# Define a função login do usuário
+
+#def login_usr(request):
+   #return render(request, 'login_usr.html')
+
+# Define a função do Menu_analitico
+
+def menu_analitico(request):
+    return render(request, 'menu_analitico.html')
+
 
 # FUNÇÃO PARA IMPORTAR OS ARQUIVOS DE DATASET
 def ia_import(request):
@@ -32,8 +61,8 @@ def ia_import_save(request):
                 row2 = row.replace(',', '.')
                 row3 = row2.split(';')
                 DatasetCancerBucal.objects.create(
-                                grupo = row3[0], tabagismo = float(row3[1]), consumo_alcool = float(row3[2]), 
-                                idade = float(row3[3]), sexo = float(row3[4]), 
+                                grupo = row3[0], idade = float(row3[1]), sexo = float(row3[2]), 
+                                tabagismo = float(row3[3]), consumo_alcool = float(row3[4]), 
                                 infeccao_hpv = float(row3[5]), exposicao_solar = float(row3[6]),
                                 dieta_inadequada = float(row3[7]), higiene_bucal_inadequada = float(row3[8]), 
                                 uso_protese_inadequada = float(row3[9]), grau_risco = float(row3[10]))

@@ -5,6 +5,7 @@ atender as necessidades da views
 
 from django.db import models
 #Criando uma class pessoa
+'''
 class pessoa (models.Model):
     nome = models.CharField(max_length=50, null=False, blank=False, verbose_name='Nome')
     email = models.CharField(max_length=50, null=False, blank=False, verbose_name='Email')
@@ -19,6 +20,7 @@ class Meta:
         ordering = ['nome','ativo',] # O Sinal - ordenar ascedente ou Descendente
         
 from django.db import models
+'''
 
 class pessoa(models.Model):
     nome = models.CharField(max_length=50, null=False, blank=False, verbose_name='Nome')
@@ -32,6 +34,7 @@ def __str__(self):
         return self.nome
 class Meta:
         ordering = ['nome', 'funcao']
+
         
 class procedimento(models.Model):
     descricao = models.CharField(max_length=50, null=False, blank=False, verbose_name='Descricao')

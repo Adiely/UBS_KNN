@@ -1,0 +1,36 @@
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
+<!doctype html>
+<html>
+<head>
+    <title> SISTEMA DE GERAÇÃO DE MODELOS - PÁGINA DE LOGIN</title>
+     <link rel="stylesheet" href="{% static 'css/styles.css'%}">
+</head>
+<body>
+    <center>
+        <br><br><br><br>
+        <img src="{% static 'dados_pacientes.png' %}" class="img-fluid" alt="Prancheta mais estetoscópio" width="10%">
+        <br><br>
+    </center>
+        <form method="POST" action="{% url 'login_usr' %}">
+        {% csrf_token %}
+    <center>
+            <p style="width:300px;">Bem Vindo a Página de Login</p>
+            <div style="border-style: ridge; border-radius: 2px; width: 300px;">
+                <br>
+                <p><input type="text" name="username" class="border-top-1" placeholder="Usuário"
+                 style="width:280px;">
+                </p>
+                <p></p><input type="password" name="password" class="border-top-1" placeholder="Senha"
+                style="width:280px;">
+                </p>
+                <p></p><input type="submit" value="Fazer Login" class="btn btn-info"></p>
+            </div>
+            </center>
+     </form>
+</body>
+<br><br>
+</html>

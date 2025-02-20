@@ -4,27 +4,27 @@
 {% bootstrap_javascript %}
 {% bootstrap_messages %}
 {% load render_table from django_tables2 %}
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-<title>Lista de Pessoas</title>
-</head>
-<body>
-<div class="container">
-<div class="col-md-12 col-sm-12 col-xs-12">
-<center>
-<p>bdpratico\home\templates\home\pessoa_menu.html</p>
-<img src="{% static 'dados_pacientes.png' %}" class="img-fluid" alt="Teste" width="10%">
-<br><br>
-<a href="{% url 'pessoa_create_alias' %}"><input type="button" class="btn btn-primary" value="Incluir Novo">
+  <head>
+    <title>Lista de Pessoas</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <center>
+          <p>bdpratico\home\templates\home\pessoa_menu.html</p>
+          <img src="{% static 'dados_pacientes.png' %}" class="img-fluid" alt="Teste" width="10%" />
+          <br /><br />
+          <a href="{% url 'pessoa_create_alias' %}">
+            <input type="button" class="btn btn-primary" value="Incluir Novo" />
 
-    {% render_table table %}
+            {% render_table table %}
 
-<br>
-
-</a>
-</center>
-</div>
-</div>
-</body>
+            <br />
+          </a>
+        </center>
+      </div>
+    </div>
+  </body>
 </html>

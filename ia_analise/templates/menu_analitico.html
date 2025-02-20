@@ -1,0 +1,39 @@
+{% load bootstrap5 %}
+{% load static %}
+{% bootstrap_messages %}
+{% bootstrap_javascript %}
+{% bootstrap_css %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Gerenciador de UBS</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css'%}">
+</head>
+<body>
+    <header>
+        <h1>Bem-vindo ao Sistema Gerenciador de UBS</h1>
+    </header>
+
+    <nav>
+        <a href="/home">Início</a>
+        <a href="ia_import">Importar Csv</a>
+        <a href="ia_import_list">Lista Importada</a>
+        <a href="ia_knn_matriz">Matrix de Confusão</a>
+        <a href="ia_knn_recall">Recall</a>
+        <a href="ia_knn_roc">Curva Roc</a>
+        <a href="ia_knn_treino">Treino</a>
+       
+    </nav>
+
+    <div class="image-container">
+        <img src="{% static 'imagem01.png' %}" alt="Representação do Sistema Gerenciador de UBS">
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Sistema Gerenciador de UBS. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
