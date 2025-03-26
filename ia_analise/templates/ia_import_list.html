@@ -17,10 +17,10 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
         <table class="table table-striped table-hover">
         <th>Grupo</th>
-        <th>Idade</th>
-        <th>Sexo</th>
         <th>Tabagismo</th>
         <th>Consumo de Álcool</th>
+        <th>Idade</th>
+        <th>Sexo</th>
         <th>Infecção por HPV</th>
         <th>Exposição Solar</th>
         <th>Dieta Inadequada</th>
@@ -30,10 +30,10 @@
         {% for regs in DatasetCancerBucal %}
             <tr>
                 <td>{{ regs.grupo }}</td>
-                <td>{{ regs.idade}}</td>
-                <td>{{ regs.sexo }}</td>
-                <td>{{ regs.tabagismo }}</td>
-                <td>{{ regs.consumo_alcool}}</td>
+                <td>{{ regs.tabagismo}}</td>
+                <td>{{ regs.consumo_alcool }}</td>
+                <td>{{ regs.idade }}</td>
+                <td>{{ regs.sexo}}</td>
                 <td>{{ regs.infeccao_hpv }}</td>
                 <td>{{ regs.exposicao_solar }}</td>
                 <td>{{ regs.dieta_inadequada }}</td>

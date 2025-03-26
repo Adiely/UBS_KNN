@@ -122,7 +122,16 @@ USE_TZ = True
 #O django trata as imagems como “Arquivos estáticos” 
 #que devem todos ser armazenados em uma pasta
 
-STATIC_URL = 'static/'
+import os
+
+# Caminho base do projeto
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Configuração de arquivos estáticos
+STATIC_URL = 'static/'  # URL para acessar arquivos estáticos no navegador
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),  # Caminho para o diretório static
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

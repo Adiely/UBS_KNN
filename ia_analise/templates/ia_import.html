@@ -6,7 +6,6 @@
 </head>
 <body>
     <h1>Upload / Import Arquivo!</h1>
-    <p>bdpratico\exemplo02\templates\ia_import.html</p>
     <form method="post" enctype="multipart/form-data" action="{% url 'ia_import_save' %}">
     {% csrf_token %}
     <input type="file" name="arq_upload" />
